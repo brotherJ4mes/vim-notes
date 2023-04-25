@@ -86,6 +86,14 @@ endif
 syntax cluster notesInline add=notesBold
 highlight notesBold gui=bold cterm=bold
 
+
+" Highlight text emphasized in strike thru font. (JAK edit; Apr 2023)
+syntax region notesStrikethru matchgroup=notesSrikethruMarker start=/\~\~/ end=/\~\~/ contains=@Spell concealends
+highlight link notesSrikethruMarker notesHiddenMarker
+syntax cluster notesInline add=notesStrikethru
+highlight notesStrikethru gui=strikethrough cterm=strikethrough
+
+
 " Highlight domain names, URLs, e-mail addresses and filenames. {{{2
 
 " FIXME This setting is lost once the user switches color scheme!
@@ -104,7 +112,8 @@ endif
 syntax match notesEmailAddr /\<\w[^@ \t\r]*\w@\w[^@ \t\r]\+\w\>/
 syntax cluster notesInline add=notesEmailAddr
 highlight def link notesEmailAddr notesSubtleURL
-syntax match notesUnixPath /\k\@<![\/~]\S\+\(\/\|[^ [:punct:]]\)/
+" JAK comment below
+"syntax match notesUnixPath /\k\@<![\/~]\S\+\(\/\|[^ [:punct:]]\)/
 syntax cluster notesInline add=notesUnixPath
 highlight def link notesUnixPath Directory
 syntax match notesPathLnum /:\d\+/ contained containedin=notesUnixPath
